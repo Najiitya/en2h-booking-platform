@@ -3,7 +3,10 @@ import { ServicesService } from './services.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('services')
+@ApiBearerAuth() // This decorator indicates that the endpoints require a Bearer token for authentication
 @Controller('services')
 @UseGuards(JwtAuthGuard)
 export class ServicesController {
