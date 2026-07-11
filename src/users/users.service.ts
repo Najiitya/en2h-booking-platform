@@ -1,26 +1,31 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { Injectable, ConflictException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User)
+    private readonly usersRepository: Repository<User>,
+  ) {}
+
+  async create(email: string, pass: string): Promise<User> {
+    const existingUser = await this.findByEmail(email);
+    if (existingUser) {
+      throw new ConflictException('Email is already registered.');
+    }
+
+    // Hash the password using bcrypt
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(pass, salt);
+
+    const newUser = this.usersRepository.create({ email, password: hashedPassword });
+    return await this.usersRepository.save(newUser);
   }
 
-  findAll() {
-    return `This action returns all users`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async findByEmail(email: string): Promise<User | null> {
+    return await this.usersRepository.findOne({ where: { email } });
   }
 }
