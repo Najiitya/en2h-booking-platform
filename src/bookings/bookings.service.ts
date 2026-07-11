@@ -52,14 +52,14 @@ export class BookingsService {
 
   // 2. Get All Bookings
   async findAll(): Promise<Booking[]> {
-    return await this.bookingRepository.find({ relations: ['service'] });
+    return await this.bookingRepository.find({ relations: { service: true } });
   }
 
   // 3. Get Booking by ID
   async findOne(id: string): Promise<Booking> {
     const booking = await this.bookingRepository.findOne({ 
       where: { id },
-      relations: ['service'] // Returns the associated service data
+      relations: { service: true } // Returns the associated service data
     });
     
     if (!booking) {
