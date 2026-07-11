@@ -1,11 +1,25 @@
-import { BookingStatus } from '../enums/booking-status.enum';
+import { IsString, IsEmail, IsNotEmpty, IsDateString } from 'class-validator';
 
 export class CreateBookingDto {
+  @IsString()
+  @IsNotEmpty()
   customerName: string;
+
+  @IsEmail()
   customerEmail: string;
+
+  @IsString()
+  @IsNotEmpty()
   customerPhone: string;
+
+  @IsString()
+  @IsNotEmpty()
   serviceId: string;
-  bookingDate: string; // Expected format: YYYY-MM-DD
-  bookingTime: string; // Expected format: HH:MM
-  notes?: string;
+
+  @IsDateString() // Validates the date format (YYYY-MM-DD)
+  bookingDate: string;
+
+  @IsString()
+  @IsNotEmpty()
+  bookingTime: string;
 }
