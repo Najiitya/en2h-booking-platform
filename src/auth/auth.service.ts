@@ -11,9 +11,9 @@ export class AuthService {
   ) {}
 
   async register(email: string, pass: string) {
-    const user = await this.usersService.create(email, pass);
+    const user = await this.usersService.create({ email, passwordHash: pass });
     // Don't return the password in the response!
-    const { password, ...result } = user;
+    const { passwordHash, ...result } = user as any;
     return result;
   }
 

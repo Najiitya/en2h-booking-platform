@@ -1,28 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('services')
 export class Service {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 255 })
-  title: string; //
+  @Column()
+  name: string;
 
-  @Column({ type: 'text' })
-  description: string; //
+  @Column()
+  description: string;
 
-  @Column({ type: 'int' })
-  duration: number; // Stored in minutes
+  @Column('int')
+  price: number; 
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
-  price: number; //
-
-  @Column({ type: 'boolean', default: true })
-  isActive: boolean; //
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
+  @Column('int', { default: 60 }) // Duration in minutes
+  duration: number;
 }

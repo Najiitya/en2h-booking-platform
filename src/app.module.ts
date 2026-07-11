@@ -1,43 +1,27 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-// Feature Modules
+// 1. Import your feature modules here
+import { UsersModule } from './users/users.module';
 import { ServicesModule } from './services/services.module';
 import { BookingsModule } from './bookings/bookings.module';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    // 1. Load the .env file globally
-    ConfigModule.forRoot({
-      isGlobal: true, 
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRoot({
+      type: 'better-sqlite3',
+      database: 'en2h_booking.sqlite',
+      autoLoadEntities: true,
+      synchronize: true, 
     }),
-    
-    // 2. Configure the global database connection
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get<string>('DB_HOST'),
-        port: configService.get<number>('DB_PORT'),
-        username: configService.get<string>('DB_USERNAME'),
-        password: configService.get<string>('DB_PASSWORD'),
-        database: configService.get<string>('DB_NAME'),
-        autoLoadEntities: true, // Automatically finds your Service, Booking, and User entities
-        synchronize: true,      // Automatically creates the database tables
-      }),
-    }),
-
-    // 3. Import your application modules
-    ServicesModule,
-    BookingsModule,
-    UsersModule,
-    AuthModule,
+    // 2. Add them to this array so NestJS activates their controllers
+    UsersModule,    
+    ServicesModule, 
+    BookingsModule, 
   ],
   controllers: [AppController],
   providers: [AppService],

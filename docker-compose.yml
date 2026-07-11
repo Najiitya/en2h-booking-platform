@@ -4,11 +4,11 @@ services:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_USER: en2h_user
-      POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: naJiYa@sQl;
       POSTGRES_DB: en2h_booking_db
     ports:
-      - '5432:5432'
+      - '5433:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

@@ -5,9 +5,8 @@ import { ServicesController } from './services.controller';
 import { Service } from './entities/service.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Service])], // Register the entity repository
+  imports: [TypeOrmModule.forFeature([Service])],
   controllers: [ServicesController],
   providers: [ServicesService],
-  exports: [TypeOrmModule], // Export it so other modules (like Bookings) can use it later
 })
 export class ServicesModule {}

@@ -1,44 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Service } from '../../services/entities/service.entity';
-import { BookingStatus } from '../enums/booking-status.enum';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
 @Entity('bookings')
 export class Booking {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 255 })
-  customerName: string;
+  @Column()
+  userId: string; 
 
-  @Column({ type: 'varchar', length: 255 })
-  customerEmail: string;
+  @Column()
+  serviceId: string; 
 
-  @Column({ type: 'varchar', length: 20 })
-  customerPhone: string;
+  @Column()
+  appointmentDate: string; 
 
-  @Column({ type: 'uuid' })
-  serviceId: string;
-
-  // Many bookings can be tied to one specific service
-  @ManyToOne(() => Service, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'serviceId' })
-  service: Service;
-
-  @Column({ type: 'date' })
-  bookingDate: Date;
-
-  @Column({ type: 'time' })
-  bookingTime: string;
-
-  @Column({ type: 'enum', enum: BookingStatus, default: BookingStatus.PENDING })
-  status: BookingStatus;
-
-  @Column({ type: 'text', nullable: true })
-  notes: string;
+  // THE FIX: Explicitly setting the type to 'text' for SQLite compatibility
+  @Column({ type: 'text', default: 'pending' }) 
+  status: string; 
 
   @CreateDateColumn()
   createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }
