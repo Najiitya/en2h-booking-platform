@@ -96,3 +96,61 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## ⚙️ Running the Application
+
+To start the server in development mode with hot-reloading enabled:
+
+```bash
+# Start the server in watch mode
+npm run start:dev
+
+The API will be available at http://localhost:3000. The SQLite database file (en2h_booking.sqlite) will automatically generate in the root directory on the first run.
+
+Testing
+The application includes a 100% passing unit test suite for all core logic, services, and authentication flows. It utilizes mocked database repositories to ensure isolated, side-effect-free testing without writing junk data to the local SQLite file.
+
+# Run all unit tests
+npm run test
+
+Core API Endpoints
+Authentication
+POST /auth/register - Register a new user (returns user data)
+
+POST /auth/login - Authenticate and receive a signed JWT access token
+
+Users
+POST /users - Create a user directly (Admin fallback)
+
+GET /users - Retrieve a list of all users
+
+GET /users/:id - Retrieve a specific user by UUID
+
+PATCH /users/:id - Update user details (e.g., role)
+
+DELETE /users/:id - Remove a user from the system
+
+Services
+POST /services - Create a new bookable service (includes name, description, price, duration)
+
+GET /services - List all available services
+
+GET /services/:id - Retrieve a specific service by UUID
+
+PATCH /services/:id - Update service pricing or duration
+
+DELETE /services/:id - Remove a service
+
+Bookings
+POST /bookings - Schedule a new appointment (links userId and serviceId)
+
+GET /bookings - View all system bookings
+
+GET /bookings/:id - Retrieve specific booking details
+
+PATCH /bookings/:id - Update a booking's status (e.g., "pending" to "confirmed")
+
+DELETE /bookings/:id - Cancel or remove a booking
+
+Author
+Najith Nethwan
