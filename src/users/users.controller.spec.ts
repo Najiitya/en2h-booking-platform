@@ -8,7 +8,8 @@ describe('UsersController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
-      providers: [UsersService],
+      // We provide a blank mock object so NestJS stops looking for the database
+      providers: [{ provide: UsersService, useValue: {} }], 
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
