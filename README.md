@@ -1,137 +1,69 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# EN2H Booking Platform REST API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Project Overview
+A robust, fully tested backend REST API built with NestJS to manage users, bookable services, and appointments. It features complete JWT-based authentication and a lightweight SQLite database managed via TypeORM. 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
+## Installation Steps
+Ensure you have Node.js and npm installed on your machine. Clone the repository and install all required dependencies:
 
 ```bash
-$ npm install
-```
+# Clone the repository
+git clone <your-repo-url>
+cd en2h-booking-platform
 
-## Compile and run the project
+# Install dependencies
+npm install
 
-```bash
-# development
-$ npm run start
+Environment Variables
+In a production environment, sensitive data should be managed via a .env file. Currently, the app runs with default configurations, but you should configure the following if moving to production:
 
-# watch mode
-$ npm run start:dev
+PORT=3000
+JWT_SECRET=your_super_secret_jwt_key
+DATABASE_TYPE=better-sqlite3
+DATABASE_NAME=en2h_booking.sqlite
 
-# production mode
-$ npm run start:prod
-```
+Database Setup
+This project uses SQLite (better-sqlite3) as its database. For development purposes, TypeORM is configured with synchronize: true.
+This means you do not need to manually create the database or tables. The en2h_booking.sqlite database file and all associated tables (Users, Services, Bookings) will be automatically generated in the root directory the first time you run the application.
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-
-## ⚙️ Running the Application
-
+Running the Application
 To start the server in development mode with hot-reloading enabled:
 
-```bash
 # Start the server in watch mode
 npm run start:dev
 
-The API will be available at http://localhost:3000. The SQLite database file (en2h_booking.sqlite) will automatically generate in the root directory on the first run.
+The API will be available at http://localhost:3000.
 
-Testing
-The application includes a 100% passing unit test suite for all core logic, services, and authentication flows. It utilizes mocked database repositories to ensure isolated, side-effect-free testing without writing junk data to the local SQLite file.
+Running Migrations
+Note: Because TypeORM is currently set to synchronize: true in app.module.ts, schema changes are handled automatically on server restart.
 
-# Run all unit tests
-npm run test
+When migrating to a production environment (where synchronize must be false), you will use the TypeORM CLI for migrations:
 
-Core API Endpoints
-Authentication
-POST /auth/register - Register a new user (returns user data)
+# Generate a new migration based on entity changes
+npm run typeorm migration:generate -- -n MigrationName
+
+# Run pending migrations
+npm run typeorm migration:run
+
+API Documentation
+🔐 Authentication
+POST /auth/register - Register a new user (Body: email, password)
 
 POST /auth/login - Authenticate and receive a signed JWT access token
 
-Users
+👤 Users
 POST /users - Create a user directly (Admin fallback)
 
 GET /users - Retrieve a list of all users
 
 GET /users/:id - Retrieve a specific user by UUID
 
-PATCH /users/:id - Update user details (e.g., role)
+PATCH /users/:id - Update user details
 
 DELETE /users/:id - Remove a user from the system
 
-Services
-POST /services - Create a new bookable service (includes name, description, price, duration)
+🏷️ Services
+POST /services - Create a new bookable service (Body: name, description, price, duration)
 
 GET /services - List all available services
 
@@ -141,16 +73,33 @@ PATCH /services/:id - Update service pricing or duration
 
 DELETE /services/:id - Remove a service
 
-Bookings
-POST /bookings - Schedule a new appointment (links userId and serviceId)
+📅 Bookings
+POST /bookings - Schedule a new appointment (Body: userId, serviceId, appointmentDate, status)
 
 GET /bookings - View all system bookings
 
 GET /bookings/:id - Retrieve specific booking details
 
-PATCH /bookings/:id - Update a booking's status (e.g., "pending" to "confirmed")
+PATCH /bookings/:id - Update a booking's status
 
 DELETE /bookings/:id - Cancel or remove a booking
 
-Author
-Najith Nethwan
+Assumptions Made
+Database: SQLite is sufficient for the current development and demonstration phase.
+
+Authentication: Plain text passwords are used strictly for rapid prototyping. (See Future Improvements).
+
+Schema Synchronization: TypeORM's synchronize: true is acceptable for local development to bypass manual migration management.
+
+Authorization: The JWT strategy currently authenticates users, but specific Role-Based Access Control (RBAC) route guards are not yet strictly enforced on CRUD endpoints.
+
+Future Improvements
+Password Hashing: Integrate bcrypt into the AuthService to securely hash passwords before saving them to the database.
+
+Role Guards: Implement NestJS Guards to restrict endpoints (e.g., only admin roles can create/delete Services or view all Users).
+
+Automated Documentation: Integrate @nestjs/swagger to auto-generate a Swagger UI for API testing and documentation.
+
+Production Database: Migrate from SQLite to PostgreSQL or MySQL for production scalability.
+
+Input Validation: Add class-validator and class-transformer to the DTOs to ensure incoming request bodies match required formats.
